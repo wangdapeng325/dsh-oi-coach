@@ -1,0 +1,14 @@
+﻿{
+  // 鏋勫缓閰嶇疆锛氭妸 src/*.ts 缂栬瘧涓?ESM锛坉ist/*.js锛夛紝淇濈暀鐩稿瀵煎叆缁撴瀯锛?  // @deepseek-ai/* 淇濇寔澶栭儴瀵煎叆锛岀敱杩愯鏃剁殑 Node 瑙ｆ瀽銆?  // 鐢ㄦ硶锛歯ode <repo>/node_modules/typescript/lib/tsc.js -p tsconfig.build.json
+  "extends": "./tsconfig.check.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "declaration": false,
+    "declarationMap": false,
+    "sourceMap": false,
+    "allowImportingTsExtensions": false,
+    "outDir": "dist",
+    "rootDir": "src"
+  },
+  "include": ["src"]
+}
