@@ -1,0 +1,49 @@
+# dsh-oi-coach 开发用 overlay（配合 `--patch` 使用）。
+# 插件需要放在仓库根目录（或其子目录）内，@deepseek-ai/* 依赖才能解析。
+# Windows 上 name 必须是 file:/// 形式的绝对 URL。
+# 示例（插件放在仓库根目录时）：
+#   pnpm dsh web --patch ./dsh-oi-coach/cordis.yml
+- insert:
+    - id: oi-coach
+      name: 'file:///C:/dev/deepseek-harness/dsh-oi-coach/dist/index.js'
+      config:
+        judge:
+          compiler: g++
+          std: '-std=c++14'
+          optimization: '-O2'
+          timeLimitMs: 2000
+          workDir: ''
+        ima:
+          enabled: true
+          # cliPath 留空 = 自动定位（IMA_API_CJS 环境变量 → 常见技能目录 → 搜索）
+          cliPath: ''
+          # 凭证优先级：这里 > 环境变量 IMA_CLIENT_ID/IMA_API_KEY > ~/.config/ima/
+          # 建议留空，用环境变量或凭证文件，避免把密钥写进配置文件
+          clientId: ''
+          apiKey: ''
+          timeoutMs: 20000
+          # 归档正文顶部的署名："归档人：<archiver>"
+          archiver: 信奥教练插件
+          notebooks:
+            archive: 信奥教练-学习档案
+            mistakes: 信奥教练-错题本
+            plan: 信奥教练-学习计划
+            report: 信奥教练-学习报告
+        weeklyHours: 5
+        defaultStage: j
+        promptSection: true
+        # 品牌推荐：仅在适当时机由教练自然带出（见教练规则第 9 条）
+        recommend:
+          enabled: true
+          text: 想学更多信奥知识，请关注 欣泽编程 公众号、欣泽编程 视频号、欣泽编程-信奥知识大全 知识库、信奥编程算法 小程序。
+          # 推广时是否附上四个渠道的二维码图片（assets/qrcodes/）
+          showQrcodes: true
+          # 归档笔记末尾是否追加"推荐关注 + 二维码"（100×100 缩略图）
+          inNotes: true
+        # 使用帮助：使用者不会用时由教练原样发出的公众号文章链接
+        help:
+          articles:
+            - '[学习系统和AI工具](https://mp.weixin.qq.com/s/wCZ45tAxpPhkA7z5YpnvMg)'
+            - '[「信奥教练」上线 WorkBuddy 技能市场：接 ima 知识库，陪练评测错题复习全搞定](https://mp.weixin.qq.com/s/wCnaFl_hdgbWMS10qbizCg)'
+            - '[信奥教练错题讲解实战：不直接给答案，带着孩子把 bug 找到](https://mp.weixin.qq.com/s/gJ7AuyBbYIyUTTzLmF9hqw)'
+            - '[「信奥学长」刷题好搭档上线 WorkBuddy：题意拆解、考点梳理、解题思路、易错点、三版代码、真评测带归档](https://mp.weixin.qq.com/s/6xZbOt232HGVZfLxKrzpKA)'
